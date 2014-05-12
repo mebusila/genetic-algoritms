@@ -4,17 +4,11 @@
 #include "genetic_algorithm.h"
 
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-const int ledPin = 13;
 
-int ledState = LOW;
-long previousMillis = 0;
-long updateDisplayInterval = 100;
-
-int currentGeneration = 0;
+unsigned int currentGeneration = 0;
 bool done = false;
 
 void setup() {
-    pinMode(ledPin, OUTPUT);
     lcd.begin(16, 2);
 
     randomSeed(analogRead(0));
@@ -25,16 +19,6 @@ void setup() {
 }
 
 void loop() {
-    unsigned long currentMillis = millis();
-    if(currentMillis - previousMillis > updateDisplayInterval) {
-        previousMillis = currentMillis;
-        if (ledState == LOW)
-            ledState = HIGH;
-        else
-            ledState = LOW;
-        digitalWrite(ledPin, ledState);
-        
-    }
     if (done == false) {
         if (currentGeneration < MAX_GENERATIONS) {
             calc_fitness(*population);
@@ -47,8 +31,8 @@ void loop() {
                 mate(*population, *buffer);
                 swap(population, buffer);
                 currentGeneration++;
-                updateDisplay();
             }
+            updateDisplay();
         } else {
             done = true;
             lcd.setCursor(0, 1);

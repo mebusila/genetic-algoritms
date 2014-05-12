@@ -1,11 +1,11 @@
 #include <vector>
 #include <string>
 
-#define POPULATION_SIZE      16
+#define POPULATION_SIZE      20
 #define MAX_GENERATIONS      16384
 #define CROSSOVER            RAND_MAX * 0.80f
 #define ELITISM_RATE         0.10f
-#define MUATION_RATE         0.30f
+#define MUATION_RATE         0.90f
 #define MUTATION             RAND_MAX * MUATION_RATE
 #define TARGET               std::string("hello world")
 
